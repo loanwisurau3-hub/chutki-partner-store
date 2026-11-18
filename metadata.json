@@ -1,0 +1,6 @@
+{
+  "name": "Gossaigaon Store",
+  "description": "Store Partner & Kirana Command Center for Gossaigaon Bazar — live order KOT packing, inventory approvals, payouts, and store GPS management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

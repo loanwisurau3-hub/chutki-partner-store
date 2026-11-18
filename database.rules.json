@@ -1,0 +1,54 @@
+{
+  "rules": {
+    "restaurants": {
+      "$restaurantUid": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid == $restaurantUid"
+      }
+    },
+    "orders": {
+      "$orderId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "inAppCalls": {
+      "$orderId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "riderCallInbox": {
+      "$riderUid": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    },
+    "restaurantCallInbox": {
+      "$restaurantUid": {
+        ".read": "auth != null && auth.uid == $restaurantUid",
+        ".write": "auth != null"
+      }
+    },
+    "tripChats": {
+      "$orderId": {
+        "messages": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        }
+      }
+    },
+    "riderPickupAlerts": {
+      "$riderUid": {
+        "$orderId": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        }
+      }
+    },
+    "$other": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}

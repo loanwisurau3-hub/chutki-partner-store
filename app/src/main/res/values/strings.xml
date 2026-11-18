@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Gossaigaon Store</string>
+    <string name="partner_subtitle">Store Partner &amp; Kirana Command Center</string>
+    <string name="security_ribbon">Gossaigaon Bazar Merchant Protection &amp; KOT Dispatch Active</string>
+    <string name="suspended_banner">STORE SUSPENDED BY ADMIN: Order processing locked. Please contact Admin.</string>
+    <string name="tab_orders">Live Packing</string>
+    <string name="tab_menu">Products</string>
+    <string name="tab_reports">Wallet</string>
+    <string name="tab_profile">Store</string>
+    <string name="cd_store_logo">Gossaigaon Store Logo</string>
+    <string name="cd_duty_toggle">Toggle Store Open or Closed</string>
+    <string name="cd_sound_toggle">Toggle Order Alert Sound</string>
+    <string name="cd_logout">Log Out</string>
+    <string name="cd_product_image">Product Photo</string>
+    <string name="cd_print_kot">Print Packing KOT</string>
+    <string name="cd_close_dialog">Close</string>
+</resources>
