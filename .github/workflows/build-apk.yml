@@ -37,7 +37,7 @@ jobs:
         with:
           gradle-version: '9.3.1'
 
-      - name: Ensure .env exists for Secrets plugin
+      - name: Ensure .env has non-empty values for Secrets plugin
         working-directory: ${{ steps.locate.outputs.project_dir }}
         env:
           S_GEMINI: ${{ secrets.GEMINI_API_KEY }}
@@ -45,11 +45,15 @@ jobs:
           S_TURN_USER: ${{ secrets.WEBRTC_TURN_USERNAME }}
           S_TURN_CRED: ${{ secrets.WEBRTC_TURN_CREDENTIAL }}
         run: |
-          touch .env
-          grep -q "^GEMINI_API_KEY=" .env || printf 'GEMINI_API_KEY=%s\n' "$S_GEMINI" >> .env
-          grep -q "^WEBRTC_TURN_URL=" .env || printf 'WEBRTC_TURN_URL=%s\n' "$S_TURN_URL" >> .env
-          grep -q "^WEBRTC_TURN_USERNAME=" .env || printf 'WEBRTC_TURN_USERNAME=%s\n' "$S_TURN_USER" >> .env
-          grep -q "^WEBRTC_TURN_CREDENTIAL=" .env || printf 'WEBRTC_TURN_CREDENTIAL=%s\n' "$S_TURN_CRED" >> .env
+          if [ -f .env.example ]; then
+            sed -i 's/^\([A-Za-z0-9_]*\)=[[:space:]]*$/\1=none/' .env.example
+          fi
+          {
+            printf 'GEMINI_API_KEY=%s\n' "${S_GEMINI:-none}"
+            printf 'WEBRTC_TURN_URL=%s\n' "${S_TURN_URL:-none}"
+            printf 'WEBRTC_TURN_USERNAME=%s\n' "${S_TURN_USER:-none}"
+            printf 'WEBRTC_TURN_CREDENTIAL=%s\n' "${S_TURN_CRED:-none}"
+          } > .env
 
       - name: Ensure debug.keystore exists
         working-directory: ${{ steps.locate.outputs.project_dir }}
@@ -66,7 +70,7 @@ jobs:
 
       - name: Build Debug APK
         working-directory: ${{ steps.locate.outputs.project_dir }}
-        run: gradle assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon --no-configuration-cache
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
